@@ -1,0 +1,96 @@
+README:
+
+The make file is in the src folder.
+
+SMyLang: by Sasha Hedges
+
+SMyLang (Smiley Language) is based on smileys -> :) 
+
+There are many different types of smileys that represent the syntax of the language:
+
+;) -> is a comment 
+
+:) -> is the opening of a function, if statement, while loop, and blocks
+
+:] -> is an opening of an array initialization or call
+
+:> -> is an opening to a lambda
+
+This is a basic function:
+(smiley is the define keyword)
+
+	:) smiley functionName :) parameters (:
+	:)
+    	    smile h = 4 :|
+    	    h + 3 :|
+	(:
+	(:
+
+
+This is a basic function call:
+
+	functionName :) 1 2 3 (:
+
+This is variable definition:
+
+	smile variableName = 3 :|
+
+This is a reassignment:
+
+	grin variableName = 4 :|
+
+
+This is an if statement:
+    (else is optional)
+
+	:)
+	if x = 3?
+	    :) "true" :| (:
+	else 
+	    :) "false" :| (:
+	(:
+
+This is a while loop:
+
+	:)
+	while x > 3?
+	    :) grin x = x - 1 :| (:
+	(:
+
+
+This is a lambda:
+
+	:> x y <: :) x + y :| (: 
+	
+	
+This is a lambda call:
+
+	:> x y <: :) x + y :| (: :) 1 2 (:	
+
+This is an object:
+
+	:) smiley object :) value (:
+	:)
+		smile t = "hi" :|
+		this :|
+	(:
+	(:
+
+
+This is accessing an object's values:
+
+	smile objectName = object :) 4 (: :|
+	objectName.value ----> 4
+	objectName.t     ----> "hi"
+	
+This is an array:
+
+	smile array = :] 1 2 3 4 [: :|
+	
+	
+This is accessing an array:
+
+	array :] 0 [:
+	
+	
+These are the basics of SMyLang. Enjoy!	

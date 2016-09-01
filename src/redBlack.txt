@@ -1,0 +1,315 @@
+;) Dictionary
+;) Sasha Hedges
+
+
+:) smiley Tree :)  (:
+:)
+	smile key = nil :|
+	smile root = nilNode :)(: :|
+	this :|
+(:
+(:
+
+
+:) smiley nilNode :) (:
+:)
+	smile key = nil :|
+	smile color = "BLACK" :|
+	this :|
+(:
+(:
+
+;) intialize color with red
+:) smiley node :) key value color left right p (:
+:)
+	this :|
+(:
+(:
+
+
+:) smiley treeInsert :) tree z (:
+:) 
+	smile y = nil :|
+	smile x = tree.root :|
+	:) while x.key != nil?
+		:)	
+			grin y = x :|
+			:)
+			if z.key < x.key?
+				:)
+					grin x = x.left :| 
+				(:
+			else 
+				:)
+					grin x = x.right :| 
+				(:	
+			(:
+			
+			
+		(:
+	(:
+	
+	grin z.p = y :|
+	
+	:)
+	if y = nil?
+		:) 
+			grin tree.root = z :| 
+		(:
+	else 
+		:)
+			:)
+			if z.key < y.key?
+				:)grin y.left = z :|(:
+			else 
+				:)grin y.right = z :|(:	
+			(:
+		(:
+	(:
+	
+(:
+(: ;) end treeInsert
+
+:) smiley leftRotate :) T x (:
+:)
+	:) 
+	if x.right.key = nil?
+		:) laugh :)"NOPE"(: :| (:
+	
+	else 
+		:)
+			smile y = x.right :|
+			grin x.right = y.left :|
+			:)
+			if y.left.key != nil?
+				:) 
+				grin y.left.p = x :| 
+				(:
+			(:
+			
+			grin y.p = x.p :|
+			
+			:)
+			if x.p.key = nil?
+				:)grin T.root = y :|(:
+			
+			else 
+				:)
+					:)
+					if x.key = x.p.left.key?
+						:) grin x.p.left = y :| (:		
+					else 
+						:) grin x.p.right = y :| (:
+					(:
+				(:
+			(:
+			
+			grin y.left = x :|
+			grin x.p = y :|
+			
+			
+		(:				
+			
+	(:
+
+(:  
+(: ;) end leftRot
+	
+
+:) smiley rightRotate :) T x  (:
+:)
+	:)
+	if x.left.key = nil?
+		:)laugh :)"nope"(: :| (:
+	
+	else
+		:)
+			smile y = x.left :|
+			grin x.left = y.right :|
+			
+			:)
+			if y.right.key != nil?
+				:) grin y.right.p = x :| (:				
+			(:
+			
+			grin y.p = x.p :|
+			
+			:)
+			if x.p.key = nil?
+				:) grin T.root = y :| (:
+			else
+				:)
+					:)
+					if x.key = x.p.right.key?
+						:) grin x . p . right = y :| (:
+					else 
+						:) grin x . p . left = y :| (:
+					(:
+				(:
+			(:
+			grin y.right = x :|
+			grin x.p = y :|
+			
+		(:		
+	(:
+(:
+(: ;) end rightRot
+
+:) smiley rbInsert :) tree x (:
+:)
+
+	treeInsert :) tree x (: :|	
+	
+	grin x.color = "RED" :|
+	
+	smile in1 = x.key != tree.root.key :|
+	:)
+	if in1?
+		:) smile in2 = x.p.color = "RED" :| (:
+	else 
+		:) smile in2 = false :| (:	
+	(:
+	
+	:) while in1 & in2?
+		:)
+			
+			:)
+			if x.p.key = x.p.p.left.key?
+				:) 
+					
+					smile y = x.p.p.right :| ;) changed from grin
+					:)
+					if y.color = "RED"?
+						:)
+							grin x.p.color = "BLACK" :|
+							grin y.color = "BLACK" :|
+							grin x.p.p.color = "RED" :|
+							grin x = x.p.p :|
+							
+							grin in1 = x.key != tree.root.key :|
+							grin in2 = x.p.color = "RED" :|
+						(:
+					else 
+						:)
+							:) if x.key = x.p.right.key?
+								:)
+									grin x = x.p :|
+									leftRotate :) tree x (: :|
+									grin in1 = x.key != tree.root.key :|
+									grin in2 = x.p.color = "RED" :|
+								(:
+							(:
+							grin x.p.color = "BLACK" :|
+							grin x.p.p.color = "RED" :|
+							smile c = x.p.p :|
+							rightRotate :) tree c (: :|
+							grin in1 = x.key != tree.root.key :|
+							grin in2 = x.p.color = "RED" :|
+						(:		
+					(:
+				(:
+			else 
+				:)
+					
+					smile y = x.p.p.left :| ;) changed from grin
+					
+					:)
+					if y.color = "RED"?
+						:)
+							
+							grin x.p.color = "BLACK" :|
+							grin y.color = "BLACK" :|
+							grin x.p.p.color = "RED" :|
+							grin x = x.p.p :|
+							
+							grin in1 = x.key != tree.root.key :|							
+							:) if c != nil?
+								:)grin in2 = c = "RED" :|(:
+							(:
+							
+							
+						(: 
+					else 
+						:)
+							:)
+							if x.key = x.p.left.key?
+								:)
+									
+									grin x = x.p :|
+									rightRotate :)tree x (: :|
+									grin in1 = x.key != tree.root.key :|
+									;)grin in2 = x.p.color = "RED" :|
+								(:
+							(:
+							
+							grin x.p.color = "BLACK" :|
+							grin x.p.p.color = "RED" :|
+
+							leftRotate :)tree x.p.p (: :|
+							grin in1 = x.key != tree.root.key :|
+							grin in2 = x.p.color = "RED" :|		
+												
+						(:
+					(:
+				(:	;) end else
+			(: ;) end ifOut
+			grin in1 = x.key != tree.root.key :|
+			:)
+			if in1?
+				:) smile in2 = x.p.color = "RED" :| (:
+			else 
+				:) smile in2 = false :| (:	
+			(:
+		(: ;) end whileIN
+	(: ;) end whileOut
+	
+	grin tree.root.color = "BLACK" :|
+	
+(:
+(: ;) end rbInsert
+
+:) smiley get :) key t (:
+:)
+	:)
+	if key = t.key?
+		:) t :| (:
+	else 
+		:)
+			:)
+			if key < t.key?
+				:) get :)key t.left(: :| (:
+			else 
+				:) get :)key t.right(: :|(:
+			(:
+		(:
+	(:
+(:
+(:
+	
+:) smiley dictInsert :) key value (:
+:)	
+	smile n = node :) key value "RED" nilNode :)(: nilNode:)(: nilNode:)(: (: :|
+	rbInsert :) tree n (: :|
+(:
+(:
+
+
+
+smile tree = Tree :)(: :|
+
+dictInsert :)1 "one"(:
+dictInsert :)2 "two"(:
+dictInsert :)3 "three"(:
+dictInsert :)7 "seven" (:
+dictInsert :)4 "four"(:
+dictInsert :)5 "five"(:
+dictInsert :)6 "six"(:
+
+
+smile h = get :) 3 tree.root (: :|
+smile val = h.value :|
+laugh :)val(:
+
+smile k = get :) 6 tree.root (: :|
+smile val2 = k.value :|
+laugh :)val2(:

@@ -1,0 +1,24 @@
+
+:) smiley function :) a b (:
+:)
+	a + b :|
+(:
+(:
+
+smile h = function :) 1 2 (: :|
+laugh :)h(:
+
+:) smiley node :) key value (:
+:)
+	smile color = "RED" :|
+(:
+(:
+
+smile n = node :) 1 "hey" (: :|
+smile key = n.key :|
+laugh :)key(:
+smile val = n.value :|
+laugh :)val(:
+grin n.color = "BLUE" :|
+smile col = n.color :|
+laugh :)col(:

@@ -1,0 +1,109 @@
+program : definition
+	| definition program
+
+number  : REAL 
+	| INTEGER
+
+definition : varDefinition
+	   | funtionDefinition
+	   | functionCall   -> ? what am i doing?
+	   | lambdaDefinition
+	   | lambdaCall
+	   | setVal
+
+varDefinition : SMILE VARIABLE optInit
+
+optInit : ENDLINESMILEY
+	| EQUALS expr ENDLINESMILEY
+
+
+functionDefinition : OSMILEY SMILEY VARIABLE optArgList block CSMILEY
+
+optArgList : OSMILEY CSMILEY
+       	   | OSMILEY argList CSMILEY
+
+argList : expr 
+	| expr argList
+
+expr : primary 
+     | primary operator expr
+
+
+
+primary : variableExpr
+	| STRING
+	| NUMBER
+	| BOOLEAN	
+	| MINUS primary
+	| NOT primary
+	| lambdaDefinition
+//	| osmileyExpr
+	| functionDefintion
+	| OBOXSMILEY argList CBOXSMILEY        // array  
+	
+	
+setVal : GRIN VARIABLE EQUALS expr ENDLINESMILEY	
+
+variableExpr : VARIABLE optDot
+	     | VARIABLE OBOXSMILEY expr CBOXSMILEY   // array[1]
+	     | functionCall
+
+optDot : DOT VARIABLE
+
+osmileyExpr : functionDefinition
+	    | OSMILEY expr CSMILEY
+
+
+optLambdaArgList : OPOINTYSMILEY CPOINTYSMILEY
+		 | OPOINTYSMILEY argList CPOINTYSMILEY
+
+lambdaDefinition : optLambdaArgList block optLambdaCall
+
+optLambdaCall : empty
+              | optArgList
+
+statement : varDefinition
+       	  | osmileyStatements
+	  	  | expr 
+	  	  | setVal
+
+	  
+	  
+osmileyStatements : whileLoop
+	          | ifStatement
+		  	  | functionDefinition
+
+
+block : OSMILEY statementList CSMILEY 
+      | OSMILEY CSMILEY
+
+
+statementList : statement ENDLINESMILEY
+       	      | statement ENDLINESMILEY statementList 
+
+functionCall: VARIABLE optArgList
+
+operator : PLUS
+	 | TIMES
+	 | MINUS
+	 | DIVIDE
+	 | AND 
+	 | OR
+	 | EQUALS
+	 | GTHAN
+	 | LTHAN
+	 |LTOE
+	 |GTOE
+	 |NOTEQUAL
+
+ifStatement : OSMILEY IF expr QMARK block optElse CSMILEY
+
+
+optElse : ELSE block
+	| *empty*
+
+whileLoop : OSMILEY WHILE expr QMARK block CSMILEY 
+
+Comments: winking smiley
+;) at beginning of line
+;} comments {; block comments

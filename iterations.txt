@@ -1,0 +1,25 @@
+
+:) smiley function :) x (:
+:)
+	smile h = 3 :|
+	:)
+	while x?
+		:)
+			:)
+			if  h < 0?
+				:)
+				laugh :)"DONE"(: :|
+				grin x = false :| 
+				(:
+			else 
+				:) 
+				laugh :) h (: :|
+				grin h = h - 1 :| 
+				(:	
+			(:
+		(:
+	(:
+(:
+(:
+
+function :) true (: 

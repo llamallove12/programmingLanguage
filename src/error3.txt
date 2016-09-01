@@ -1,0 +1,8 @@
+smile h = 6 :|
+:) smiley function :)(:
+:)
+	"hey" :|
+(:
+(:
+
+function :)(: :| ;) SYNTAX ERROR: no endline smiley should be there

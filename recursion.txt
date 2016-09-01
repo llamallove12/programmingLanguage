@@ -1,0 +1,18 @@
+
+:) smiley function :) sum val (:
+:)
+	:)
+	if val = 0?
+		:) sum :| (:
+	else 
+		:) 
+			smile val = val - 1 :|
+			smile sum = sum + 1 :|
+			function :) sum val (: :| 
+		(:
+	(:
+(:
+(:
+
+smile result = function :) 0 5 (: :|
+laugh :)result(: 

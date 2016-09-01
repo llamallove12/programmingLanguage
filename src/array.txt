@@ -1,0 +1,8 @@
+smile array = :] 1 2 3 [: :|
+smile val1 = array :] 0 [: :|
+smile val2 = array :] 1 [: :|
+smile val3 = array :] 2 [: :|
+
+laugh :)val1(:
+laugh :)val2(:
+laugh :)val3(:

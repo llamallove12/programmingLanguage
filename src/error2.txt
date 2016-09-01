@@ -1,0 +1,10 @@
+:) smiley function :) a b c (:
+:)
+	
+	:)
+	if a > 2?
+		laugh:)"hey"(: :| ;) SYNTAX ERROR: needs to be inside :) (:
+	(:
+	
+(:
+(:

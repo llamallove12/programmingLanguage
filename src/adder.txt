@@ -1,0 +1,563 @@
+:) smiley cons :) left right (:
+:)
+	smile car = left :|
+	smile cdr = right :|
+	this :|
+(:
+(:
+
+;):) smiley car :) lyst (:
+;))
+;)	lyst.left :|
+;)(:
+;)(:
+
+;):) smiley cdr :) lyst (:
+;):)
+;)	lyst.right :|
+;)(:
+;)(:
+
+;):) smiley setCar :) lyst item (:
+;):)
+;)	grin lyst.left = item  :|
+;)(:
+;)(:
+
+;):) smiley setCdr :) lyst item (:
+;):)
+;)	grin lyst.right = item :|
+;)(:
+;)(:
+
+
+
+;) -----------------------------------------------------------
+
+:) smiley callEach :) procedures (:
+:)
+	:)
+	if procedures = nil?
+		:) "done" :|(:
+	else 
+		:)
+			smile y = procedures.car :|
+			y :)(: :|
+			callEach :) procedures.cdr  (: :|
+		(:	
+	(:
+(:
+(:
+
+;)smile proc = :> <: :) laugh:)"hey"(: :| (: :|
+;)smile proc2 = :> <: :) laugh:)"hi"(: :| (: :|
+;)smile lyst = cons :) proc cons:)proc2 nil(: (: :|
+;)callEach :) lyst (:
+
+
+
+:) smiley makeWire :)  (:
+:)
+	smile signalVal = 0 :|
+	smile actionProcedures = nil :|
+	
+	:) smiley setMySignal :) newVal (:
+	:)
+		:)
+		if signalVal != newVal?
+			:)
+				grin signalVal = newVal :|
+				callEach :) actionProcedures (: :|
+			(:
+		else 
+			:) "done" :| (:	
+		(:
+	(:
+	(:
+	
+	:) smiley acceptActionProcedure :) proc (:
+	:)
+		grin actionProcedures = cons :) proc actionProcedures (: :|
+		proc :)(: :|
+		
+	(:
+	(:
+	
+	this :|
+	
+(:
+(:
+
+:) smiley getSignal :) wire (:
+:)
+	wire.signalVal :|
+(:
+(:
+
+:) smiley setSignal :) wire newVal(:
+:)
+	smile y = wire.setMySignal :|
+	y :) newVal (: :|
+(:
+(:
+
+:) smiley addAction :) wire action (:
+:)
+	smile y = wire.acceptActionProcedure :|	
+	y :)action(: :|
+	
+(:
+(:
+
+
+;) -----------------------------------------------------------
+
+
+:) smiley logicalNot :) s (:
+:)
+	:)
+	if s = 0?
+		:) 1 :| (:
+	else 
+		:) 0 :| (:
+	(:
+(:
+(:
+
+:) smiley logicalAnd :) s1 s2 (:
+:)
+	
+	smile a1 = s1 = 0 :|
+	smile a2 = s2 = 0 :|
+	:)
+	if a1 | a2?
+		:) 0 :| (:
+	else 
+		:) 1 :| (:
+	(:
+(:
+(:
+
+:) smiley logicalOr :) s1 s2 (:
+:)
+	
+	smile a1 = s1 = 1 :|
+	smile a2 = s2 = 1 :|
+	:)
+	if a1 | a2?
+		:) 1 :| (:
+	else 
+		:) 0 :| (:
+	(:
+(:
+(:
+
+:) smiley afterDelay :) delay action (:
+:)
+	smile curTime = currentTime :) theAgenda (: :|
+	smile add = curTime + delay :|
+	addToAgenda :) add action theAgenda (: :|
+
+(:
+(:
+
+:) smiley inverter :)input output(:
+:)
+	:) smiley invertInput :)(:
+	:)
+		smile newVal = logicalNot :) getSignal :) input (: (: :|
+		smile action = :> <: :) setSignal :) output newVal(: :| (: :|		
+		afterDelay :)inverterDelay action (: :| 
+	(:
+	(:
+	
+	addAction :) input invertInput (: :|
+	"ok" :|
+(:
+(:
+
+
+:) smiley andGate :) a1 a2 output (:
+:)
+	:) smiley andAction :)(:
+	:)
+		smile newVal = logicalAnd :) getSignal:)a1(:  getSignal:)a2(: (: :|
+		smile action = :> <: :) setSignal :) output newVal(: :| (: :|	 
+		afterDelay :) andGateDelay action (: :|		
+	(:
+	(:
+	
+	addAction :) a1 andAction (: :|
+	addAction :) a2 andAction (: :|
+	"ok" :|
+(:
+(:
+
+:) smiley orGate :) a1 a2 output (:
+:)
+	:) smiley orAction :) (:
+	:)
+		smile newVal = logicalOr :) getSignal:)a1(:  getSignal:)a2(: (: :|
+		smile action = :> <: :) setSignal :) output newVal(: :| (: :|	 
+		afterDelay :) orGateDelay action (: :|		
+	(:
+	(:
+	
+	addAction :) a1 orAction (: :|
+	addAction :) a2 orAction (: :|
+	"ok" :|
+	
+(:
+(:
+
+
+
+;)-----------------------------------------------------------------------
+;) HALF ADDER:
+:) smiley halfAdder :) a b s c (:
+:)
+	smile d = makeWire :)(: :|
+	smile e = makeWire :)(: :|
+	orGate :) a b d (: :|
+	andGate :) a b c (: :|
+	inverter :) c e (: :|
+	andGate :) d e s (: :|
+	"ok" :|
+(:
+(:
+
+
+;) FULL ADDER:
+:) smiley fullAdder :) a b cin sum cout (:
+:)
+	smile s = makeWire :)(: :|
+	smile c1 = makeWire :)(: :|
+	smile c2 = makeWire :)(: :|	
+	halfAdder :) b cin s c1 (: :|
+	halfAdder :) a s sum c2 (: :|
+	orGate :) c1 c2 cout (: :|
+	"ok" :|	
+(:
+(:
+
+;) -----------------------------------------------------------------------
+
+;) AGENDA:
+
+
+:) smiley frontPtr :) queue (:
+:)
+	queue.car :|
+(:
+(: 
+
+:) smiley rearPtr :) queue (:
+:)
+	queue.cdr :|
+(:
+(: 
+
+:) smiley setFrontPtr :) queue item (:
+:)
+	grin queue.car = item :|
+(:
+(:
+
+:) smiley setRearPtr :) queue item (:
+:)
+	grin queue.cdr = item :|
+(:
+(:
+
+:) smiley emptyQueue :)queue(:
+:)
+
+	smile front = frontPtr :) queue (: :|
+	smile result = front = nil :|
+	result :|
+(:
+(:
+
+
+:) smiley makeQueue :)(:
+:)
+	cons :) nil nil (: :|
+(:
+(:
+
+:) smiley frontQueue :) queue (: 
+:)
+	smile empty = emptyQueue :) queue (: :|
+	smile front = frontPtr :) queue (: :|
+	:)
+	if empty?
+		:) laugh :)"Error: call frontQ on empty Q"(: :| (:
+	else
+		:) front.car :| (:
+	(:
+(:
+(:
+
+
+:) smiley insertQueue :) queue item (: 
+:)
+	smile newPair = cons :) item nil (: :|
+	smile empty = emptyQueue :) queue (: :|
+	
+	:)
+	if empty?
+		:)
+			setFrontPtr :) queue newPair (: :|
+			setRearPtr :) queue newPair (: :|
+			queue :|
+		(:
+	else 
+		:)
+			smile lyst = rearPtr :)queue(: :|
+			grin lyst.cdr =  newPair :| ;)
+			setRearPtr :) queue newPair (: :|
+			queue :|
+		(:
+	(:
+
+(:
+(:
+
+
+:) smiley deleteQueue :) queue (:
+:)
+	smile empty = emptyQueue :) queue (: :|
+	:)
+	if empty?
+		:) laugh :)"Error: delete called on empty queue"(: :| (:
+	else
+		:) 
+			smile lyst = frontPtr:)queue(:  :|
+			setFrontPtr :) queue lyst.cdr (: :|
+			queue :|
+		(:
+	(:
+(:
+(:
+
+:) smiley makeTimeSeg :) time queue (:
+:)
+	cons :)time queue(: :|
+(:
+(:
+
+:) smiley segmentTime :) s (:
+:)
+	laugh :)"in SEGTIME"(: :|
+	s.car :|
+	laugh :)"in SEGTIME"(: :|
+(:
+(:
+
+:) smiley segmentQueue :) s (:
+:)
+	s.cdr :|
+(:
+(:
+
+
+:) smiley makeAgenda :)(:
+:)
+	cons :) 0 nil (: :|
+(:
+(:
+
+
+:) smiley currentTime :) agenda (:
+:)
+	agenda.car :|
+(:
+(:
+
+:) smiley setCurrentTime :) agenda time (:
+:)
+	grin agenda.car = time :|
+(:
+(:
+
+:) smiley segments :) agenda (:
+:)
+	agenda.cdr :|
+(:
+(:
+
+:) smiley setSegments :) agenda segments (:
+:)
+	grin agenda.cdr = segments :|
+(:
+(:
+
+:) smiley firstSeg :) agenda (:
+:)
+	smile lyst = segments:)agenda(: :|
+	lyst.car :|
+(:
+(:
+
+:) smiley restSegs :) agenda (:
+:)
+	smile lyst = segments:)agenda(: :|
+	lyst.cdr :|
+(:
+(:
+
+:) smiley emptyAgenda :) agenda (:
+:)
+	smile right = segments :)agenda(: :|
+	smile result = right = nil :|
+	result :|
+(:
+(:
+
+
+:) smiley addToAgenda :) time action agenda (:
+:)
+	
+	:) smiley belongsBefore :) segments (:
+	:)
+		smile left = segments = nil :|
+		laugh :)"in BELONGS"(: :|
+		smile leftR = segmentTime :) segments.car (: :|
+		
+		smile right = time < leftR :|
+		smile result = left | right :|
+		result :| 
+	(:
+	(:
+	
+	:) smiley makeNewTimeSegment :)time action(:
+	:)
+		smile q = makeQueue :)(: :|
+		insertQueue :) q action (: :|
+		makeTimeSegment :) time q (: :|
+	(:
+	(:
+
+	:) smiley addToSegments :) segments (:
+	:)
+		
+		smile left = segmentTime :) segments.car (: :|
+		:)
+		if left = time?
+			:)insertQueue :) segmentQueue:)segments.car(: action (: :|(:
+		else	
+			:)
+				smile rest = segments.cdr :|
+				smile before = belongsBefore :) rest (: :|
+						
+				:)
+				if before?
+					:)
+					grin segments.cdr = cons:) 
+							makeNewTimeSegment :)time action(: 
+							segments.cdr 
+							(:  :| 
+					(:
+				else 
+					:) addToSegments :)rest(: :| (:	
+				(:
+			(:
+		(:
+	(:
+	(:
+	
+	smile segment = segments :)agenda(: :| 
+			laugh :) "here" (: :|
+	smile before = belongsBefore :) segment (: :|
+			laugh :) "here" (: :|
+
+	:)
+	if before?
+		:)setSegments:)agenda cons:)makeNewTimeSegment:)time action(: segment (: (: :| (:
+	else
+		:)addToSegments:)segment(: :|(:	
+	(:
+	
+	
+(:
+(:
+
+
+:) smiley removeFirstAgendaItem :) agenda (:
+:)
+	smile q = segmentQueue :) firstSegment:)agenda(: (: :|
+	deleteQueue :) q (: :|
+	smile empty = emptyQueue :)q(: :|
+	:)
+	if empty?
+		:)setSegments :)agenda restSegs:)agenda(: (: :|(:
+	(:
+	
+(:
+(:
+
+:) smiley firstAgendaItem :)agenda(:
+:)
+	smile empty = emptyAgenda :)agenda(: :|
+	:)
+	if empty?
+		:)laugh :)"Error: AgendaEmpty -> called firstItem"(: :|(:
+	else 
+		:)
+			smile firstSegment = firstSeg :) agenda (: :|
+			setCurrentTime :) agenda segmentTime :) firstSegment (: (: :|
+			frontQueue :) segmentQueue :)firstSegment(: (: :|
+		(:
+	(:
+(:
+(:
+
+
+:) smiley propagate :)(:
+:)
+	smile empty = emptyAgenda :)theAgenda(: :|
+	:)
+	if empty?
+		:) "done" :|(:
+	else 
+		:) 
+			smile firstItem = firstAgendaItem :)theAgenda(: :|
+			firstItem :)(: :|
+			removeFirstAgendaItem :) theAgenda (: :|
+			propagate :)(: :|
+		(:
+	(:
+(:
+(:
+
+smile theAgenda  = nil :|
+smile andGateDelay = 0  :|
+smile orGateDelay = 0  :|
+smile inverterDelay = 0  :|
+
+grin theAgenda = makeAgenda :)(: :|
+grin andGateDelay = 5 :|
+grin orGateDelay = 3 :|
+grin inverterDelay = 1 :|
+
+smile in0 = makeWire :)(: :|
+smile in1 = makeWire :)(: :|
+smile cin = makeWire :)(: :|
+smile sum = makeWire :)(: :|
+smile cout = makeWire :)(: :|
+
+;)smile sig = in0.signalVal :|
+;)laugh :) sig (:
+
+smile full = fullAdder :) in0 in1 cin sum cout (: :|
+
+laugh :)full(: 
+
+smile k = setSignal :) in0 1 (: :|
+smile r = setSignal :)in1 1 (: :|
+
+
+laugh :)k(:
+
+
+

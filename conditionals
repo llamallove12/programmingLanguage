@@ -1,0 +1,23 @@
+:) smiley function1 :)(:
+:)
+	smile h = 2 :|
+	:)
+	if h > 4?
+		:) laugh :)"true"(: :| (:
+	else 
+		:) laugh :)"false"(: :| (:	
+	(:
+	
+	
+	:)
+	while h < 5?
+		:) 
+			laugh :) h (: :|
+			grin h = h + 1 :| 
+		(: 
+	(:
+
+(:
+(:
+
+function1 :)(:
